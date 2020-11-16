@@ -55,40 +55,19 @@ class SpringH2ApplicationTests {
 		Assertions.assertEquals(5, casualNumber);
 	}
 
-
 	//Conversions: Model To Entity - Entity To Model
 	@Test
-	void converterToModel() {
+	void converter() {
 		BookEntity bookEntity = new BookEntity();
 		bookEntity.setAuthor("Autore");
 		bookEntity.setTitle("Titolo");
 		bookEntity.setIsbn("isbn");
 
-		String s1 = bookEntity.toString();
-		String s2 = s1.substring(s1.indexOf("{"));
-		String converted = BookConvert.toBookModel(bookEntity).toString();
-		String converted2 = converted.substring(converted.indexOf("{"));
+		Book book = BookConvert.toBookModel(bookEntity);
+		BookEntity convertedToModel = BookConvert.toBookEntity(book);
 
-		Assertions.assertEquals(s2, converted2);
+		Assertions.assertEquals(convertedToModel, bookEntity);
 	}
-
-	@Test
-	void converterToEntity() {
-		Book book = new Book();
-		book.setAuthor("Autore");
-		book.setTitle("Titolo");
-		book.setIsbn("isbn");
-
-		String s1 = book.toString();
-		String s2 = s1.substring(s1.indexOf("{"));
-		String converted = BookConvert.toBookEntity(book).toString();
-		String converted2 = converted.substring(converted.indexOf("{"));
-
-		Assertions.assertEquals(s2, converted2);
-	}
-
-
-
 }
 
 
