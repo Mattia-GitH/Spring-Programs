@@ -39,9 +39,7 @@ class SpringH2ApplicationTests {
 		boolean valid = false;
 		valid = Pattern.compile("[0-9]").matcher(password).find();
 
-
 		Assertions.assertTrue(valid);
-
 	}
 
 	@Test
