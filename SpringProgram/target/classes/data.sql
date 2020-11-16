@@ -1,0 +1,1 @@
+//INSERT INTO TBL_BOOK (TITLE, AUTHOR, ISBN) VALUES ( 'ProvaTitolo','TryAutore','TryISBN' );
