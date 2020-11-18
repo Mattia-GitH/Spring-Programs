@@ -2,9 +2,11 @@ package com.SpringH2DB.SpringH2;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.regex.Pattern;
 
+@SpringBootTest
 class SpringH2ApplicationTests {
 
 	@Test
@@ -14,7 +16,7 @@ class SpringH2ApplicationTests {
 	@Test
 	void numberOfColumns() {
 		String columns = "name,surname,email,password";
-		String splitColumns[] = columns.split(",");
+		String[] splitColumns = columns.split(",");
 		Assertions.assertEquals(4, splitColumns.length);
 	}
 

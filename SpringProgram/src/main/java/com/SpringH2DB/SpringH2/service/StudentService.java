@@ -1,6 +1,6 @@
 package com.SpringH2DB.SpringH2.service;
 
-import com.SpringH2DB.SpringH2.model.Student;
+import com.SpringH2DB.SpringH2.model.StudentModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,13 +8,13 @@ import java.util.List;
 @Service
 public interface StudentService {
 
-    Student createStudent(Student student);
+    StudentModel createStudent(StudentModel studentModel);
 
-    Student updateStudent(Student student);
+    StudentModel updateStudent(StudentModel studentModel);
 
-    List<Student> listStudents();
+    List<StudentModel> listStudents();
 
-    Student studentById(long id);
+    StudentModel studentById(long id);
 
     void deleteStudent(long id);
 }

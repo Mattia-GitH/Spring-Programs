@@ -1,6 +1,6 @@
 package com.SpringH2DB.SpringH2.service;
 
-import com.SpringH2DB.SpringH2.model.Book;
+import com.SpringH2DB.SpringH2.model.BookModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,13 +8,13 @@ import java.util.List;
 @Service
 public interface BookService {
 
-    Book createBook(Book book);
+    BookModel createBook(BookModel bookModel);
 
-    Book updateBook(Book book);
+    BookModel updateBook(BookModel bookModel);
 
-    List<Book> listBook();
+    List<BookModel> listBook();
 
-    Book bookById(long bookId);
+    BookModel bookById(long bookId);
 
     void deleteBook(long id);
 }

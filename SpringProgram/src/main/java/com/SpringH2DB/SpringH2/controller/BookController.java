@@ -1,6 +1,6 @@
 package com.SpringH2DB.SpringH2.controller;
 
-import com.SpringH2DB.SpringH2.model.Book;
+import com.SpringH2DB.SpringH2.model.BookModel;
 import com.SpringH2DB.SpringH2.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,24 +16,24 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping("/books")
-    public ResponseEntity<List<Book>> listBooks() {
+    public ResponseEntity<List<BookModel>> listBooks() {
         return ResponseEntity.ok().body(bookService.listBook());
     }
 
     @GetMapping("/book/{id}")
-    public ResponseEntity<Book> bookByID(@PathVariable Long id) {
+    public ResponseEntity<BookModel> bookByID(@PathVariable Long id) {
         return ResponseEntity.ok().body(bookService.bookById(id));
     }
 
     @PostMapping("/book")
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
-        return ResponseEntity.ok().body(bookService.createBook(book));
+    public ResponseEntity<BookModel> createBook(@RequestBody BookModel bookModel) {
+        return ResponseEntity.ok().body(bookService.createBook(bookModel));
     }
 
     @PutMapping("/book/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
-        book.setId(id);
-        return ResponseEntity.ok().body(bookService.updateBook(book));
+    public ResponseEntity<BookModel> updateBook(@PathVariable Long id, @RequestBody BookModel bookModel) {
+        bookModel.setId(id);
+        return ResponseEntity.ok().body(bookService.updateBook(bookModel));
     }
 
     @DeleteMapping("/book/{id}")

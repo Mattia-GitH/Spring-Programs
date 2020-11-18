@@ -2,17 +2,17 @@ package com.SpringH2DB.SpringH2.model;
 
 import java.util.Objects;
 
-public class Student {
+public class StudentModel {
 
     private long id;
     private String name;
     private String surname;
     private int age;
 
-    public Student() {
+    public StudentModel() {
     }
 
-    public Student(long id, String name, String surname, int age) {
+    public StudentModel(long id, String name, String surname, int age) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -55,11 +55,11 @@ public class Student {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return id == student.id &&
-                age == student.age &&
-                Objects.equals(name, student.name) &&
-                Objects.equals(surname, student.surname);
+        StudentModel studentModel = (StudentModel) o;
+        return id == studentModel.id &&
+                age == studentModel.age &&
+                Objects.equals(name, studentModel.name) &&
+                Objects.equals(surname, studentModel.surname);
     }
 
     @Override
