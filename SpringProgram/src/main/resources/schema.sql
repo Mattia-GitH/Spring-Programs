@@ -3,7 +3,7 @@ DROP TABLE TBL_STUDENT IF EXISTS;
 
 CREATE TABLE PUBLIC.TBL_BOOK(
     ID int not null primary key auto_increment,
-    TITLE varchar(20),
+    TITLE varchar(50),
     AUTHOR varchar(20),
     ISBN varchar(25)
 );
