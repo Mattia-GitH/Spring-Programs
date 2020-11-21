@@ -1,7 +1,7 @@
 INSERT INTO PUBLIC.TBL_STUDENT (NAME, SURNAME, AGE) VALUES ( 'Mattia','Schiavo',18 ),
                                                            ( 'Paolo','Bianchi',20 ),
                                                            ( 'Luca','Rossi',30 ),
-                                                           ( 'Giorgio','Verdi',25 ),
+                                                           ( 'Paolo','Verdi',25 ),
                                                            ( 'Giuseppe','Brown',54 );
 
 INSERT INTO PUBLIC.TBL_BOOK (TITLE, AUTHOR, ISBN) VALUES ( 'Il buio tra la siepe', 'Paolo Bianchi','IUD5463874' ),

@@ -63,4 +63,16 @@ public class StudentServiceImp implements StudentService{
             throw new StudentNotFoundException("Student not found " + id);
         }
     }
+
+    @Override
+    public List<StudentModel> findByName(String name) {
+        List<StudentEntity> studentEntityList = repository.findByName(name);
+        return StudentConvert.listStudentsModel(studentEntityList);
+    }
+
+    @Override
+    public List<StudentModel> ageGreaterThanEqual(int age) {
+        List<StudentEntity> studentEntityList = repository.findByAgeGreaterThanEqual(age);
+        return StudentConvert.listStudentsModel(studentEntityList);
+    }
 }

@@ -26,6 +26,17 @@ public class StudentController {
         return ResponseEntity.ok().body(studentService.studentById(id));
     }
 
+    @GetMapping("/students/{name}")
+    public ResponseEntity<List<StudentModel>> findByName(@PathVariable String name){
+        return ResponseEntity.ok().body(studentService.findByName(name));
+    }
+
+    @GetMapping("/students_age/{age}")
+    public ResponseEntity<List<StudentModel>> findByName(@PathVariable int age){
+        return ResponseEntity.ok().body(studentService.ageGreaterThanEqual(age));
+    }
+
+
     @PostMapping("/student")
     public ResponseEntity<StudentModel> createStudent(@RequestBody StudentModel studentModel){
         return ResponseEntity.ok().body(studentService.createStudent(studentModel));

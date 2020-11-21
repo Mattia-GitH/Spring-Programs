@@ -17,4 +17,9 @@ public interface StudentService {
     StudentModel studentById(long id);
 
     void deleteStudent(long id);
+
+    List<StudentModel> findByName(String name);
+
+    List<StudentModel> ageGreaterThanEqual(int age);
+
 }

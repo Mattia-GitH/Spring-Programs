@@ -4,12 +4,14 @@ import com.SpringH2DB.SpringH2.convert.BookConvert;
 import com.SpringH2DB.SpringH2.exception.BookNotFoundException;
 import com.SpringH2DB.SpringH2.entity.BookEntity;
 import com.SpringH2DB.SpringH2.model.BookModel;
+import com.SpringH2DB.SpringH2.model.JoinStudentBook;
 import com.SpringH2DB.SpringH2.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImp implements BookService {
@@ -65,5 +67,23 @@ public class BookServiceImp implements BookService {
         } else {
             throw new BookNotFoundException("Book not found " + bookId);
         }
+    }
+
+    @Override
+    public List<BookModel> findByAuthor(String author) {
+        List<BookEntity> bookEntities = repository.findByAuthorContaining(author);
+        return bookConvert.listBooks(bookEntities);
+    }
+
+    @Override
+    public List<BookModel> orderByAuthor() {
+        List<BookEntity> bookEntities = repository.findAllByAuthorIsNotNullOrderByAuthor();
+        return bookConvert.listBooks(bookEntities);
+    }
+
+    @Override
+    public List<JoinStudentBook> booksAndAuthors() {
+        List<JoinStudentBook> bookEntities = repository.booksAndAuthors();
+        return bookEntities.stream().collect(Collectors.toList());
     }
 }

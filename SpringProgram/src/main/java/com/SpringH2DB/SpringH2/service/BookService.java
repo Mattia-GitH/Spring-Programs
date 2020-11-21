@@ -1,6 +1,7 @@
 package com.SpringH2DB.SpringH2.service;
 
 import com.SpringH2DB.SpringH2.model.BookModel;
+import com.SpringH2DB.SpringH2.model.JoinStudentBook;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,4 +18,11 @@ public interface BookService {
     BookModel bookById(long bookId);
 
     void deleteBook(long id);
+
+    List<BookModel> findByAuthor(String author);
+
+    List<BookModel> orderByAuthor();
+
+    List<JoinStudentBook> booksAndAuthors();
+
 }
