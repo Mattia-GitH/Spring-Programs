@@ -83,7 +83,7 @@ public class BookServiceImp implements BookService {
 
     @Override
     public List<JoinStudentBook> booksAndAuthors() {
-        List<JoinStudentBook> bookEntities = repository.booksAndAuthors();
-        return bookEntities.stream().collect(Collectors.toList());
+        List<JoinStudentBook> listBooksAndAuthors = repository.booksAndAuthors();
+        return listBooksAndAuthors.stream().collect(Collectors.toList());
     }
 }
