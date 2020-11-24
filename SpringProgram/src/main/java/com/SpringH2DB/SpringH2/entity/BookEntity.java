@@ -21,14 +21,18 @@ public class BookEntity {
     @Column(name = "ISBN")
     private String isbn;
 
+    @Column(name = "ACTIVE")
+    private boolean active;
+
     public BookEntity() {
     }
 
-    public BookEntity(long id, String title, String author, String isbn) {
+    public BookEntity(long id, String title, String author, String isbn, boolean active) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
+        this.active = active;
     }
 
     public long getId() {
@@ -63,20 +67,29 @@ public class BookEntity {
         this.isbn = isbn;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookEntity bookEntity = (BookEntity) o;
-        return id == bookEntity.id &&
-                Objects.equals(title, bookEntity.title) &&
-                Objects.equals(author, bookEntity.author) &&
-                Objects.equals(isbn, bookEntity.isbn);
+        BookEntity that = (BookEntity) o;
+        return id == that.id &&
+                active == that.active &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(author, that.author) &&
+                Objects.equals(isbn, that.isbn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, isbn);
+        return Objects.hash(id, title, author, isbn, active);
     }
 
     @Override
@@ -86,6 +99,7 @@ public class BookEntity {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", isbn='" + isbn + '\'' +
+                ", active=" + active +
                 '}';
     }
 }

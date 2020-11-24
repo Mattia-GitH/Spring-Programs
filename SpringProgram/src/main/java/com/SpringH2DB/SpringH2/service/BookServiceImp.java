@@ -36,6 +36,7 @@ public class BookServiceImp implements BookService {
             bookEntityUpdate.setAuthor(bookModel.getAuthor());
             bookEntityUpdate.setIsbn(bookModel.getIsbn());
             bookEntityUpdate.setTitle(bookModel.getTitle());
+            bookEntityUpdate.setActive(bookModel.isActive());
             repository.save(bookEntityUpdate);
             return bookConvert.toBookModel(bookEntityUpdate);
         } else {

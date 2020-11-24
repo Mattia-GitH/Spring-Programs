@@ -16,11 +16,12 @@ public class BookConvert {
         bookModel.setTitle(bookEntity.getTitle());
         bookModel.setAuthor(bookEntity.getAuthor());
         bookModel.setIsbn(bookEntity.getIsbn());
+        bookModel.setActive(bookEntity.isActive());
         return bookModel;
     }
 
     public List<BookModel> listBooks(List<BookEntity> bookEntities) {
-        return bookEntities.stream().map(x -> toBookModel(x)).collect(Collectors.toList());
+        return bookEntities.stream().map(this::toBookModel).collect(Collectors.toList());
     }
 
     public BookEntity toBookEntity(BookModel bookModel) {
@@ -28,10 +29,11 @@ public class BookConvert {
         bookEntity.setTitle(bookModel.getTitle());
         bookEntity.setAuthor(bookModel.getAuthor());
         bookEntity.setIsbn(bookModel.getIsbn());
+        bookEntity.setActive(bookModel.isActive());
         return bookEntity;
     }
 
     public List<BookEntity> listBooksEntity(List<BookModel> bookModels) {
-        return bookModels.stream().map(x -> toBookEntity(x)).collect(Collectors.toList());
+        return bookModels.stream().map(this::toBookEntity).collect(Collectors.toList());
     }
 }

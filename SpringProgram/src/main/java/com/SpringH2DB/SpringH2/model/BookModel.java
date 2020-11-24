@@ -8,15 +8,17 @@ public class BookModel {
     private String title;
     private String author;
     private String isbn;
+    private boolean active;
 
     public BookModel() {
     }
 
-    public BookModel(long id, String title, String author, String isbn) {
+    public BookModel(long id, String title, String author, String isbn, boolean active) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
+        this.active = active;
     }
 
     public long getId() {
@@ -51,12 +53,21 @@ public class BookModel {
         this.isbn = isbn;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookModel bookModel = (BookModel) o;
-        return Objects.equals(id, bookModel.id) &&
+        return id == bookModel.id &&
+                active == bookModel.active &&
                 Objects.equals(title, bookModel.title) &&
                 Objects.equals(author, bookModel.author) &&
                 Objects.equals(isbn, bookModel.isbn);
@@ -64,16 +75,17 @@ public class BookModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, isbn);
+        return Objects.hash(id, title, author, isbn, active);
     }
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "BookModel{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", isbn='" + isbn + '\'' +
+                ", active=" + active +
                 '}';
     }
 }

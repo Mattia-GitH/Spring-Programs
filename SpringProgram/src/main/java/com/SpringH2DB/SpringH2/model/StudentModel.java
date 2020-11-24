@@ -1,5 +1,6 @@
 package com.SpringH2DB.SpringH2.model;
 
+import java.sql.Date;
 import java.util.Objects;
 
 public class StudentModel {
@@ -8,15 +9,17 @@ public class StudentModel {
     private String name;
     private String surname;
     private int age;
+    private Date publication;
 
     public StudentModel() {
     }
 
-    public StudentModel(long id, String name, String surname, int age) {
+    public StudentModel(long id, String name, String surname, int age, Date publication) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
+        this.publication = publication;
     }
 
     public long getId() {
@@ -51,29 +54,39 @@ public class StudentModel {
         this.age = age;
     }
 
+    public Date getPublication() {
+        return publication;
+    }
+
+    public void setPublication(Date publication) {
+        this.publication = publication;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StudentModel studentModel = (StudentModel) o;
-        return id == studentModel.id &&
-                age == studentModel.age &&
-                Objects.equals(name, studentModel.name) &&
-                Objects.equals(surname, studentModel.surname);
+        StudentModel that = (StudentModel) o;
+        return id == that.id &&
+                age == that.age &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(surname, that.surname) &&
+                Objects.equals(publication, that.publication);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, age);
+        return Objects.hash(id, name, surname, age, publication);
     }
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "StudentModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
+                ", publication=" + publication +
                 '}';
     }
 }

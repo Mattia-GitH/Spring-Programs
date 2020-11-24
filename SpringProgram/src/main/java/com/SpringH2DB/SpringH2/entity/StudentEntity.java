@@ -1,6 +1,7 @@
 package com.SpringH2DB.SpringH2.entity;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -20,14 +21,18 @@ public class StudentEntity {
     @Column(name = "AGE")
     private int age;
 
+    @Column(name = "PUBLICATION")
+    private Date publication;
+
     public StudentEntity() {
     }
 
-    public StudentEntity(long id, String name, String surname, int age) {
+    public StudentEntity(long id, String name, String surname, int age, Date publication) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
+        this.publication = publication;
     }
 
     public long getId() {
@@ -62,6 +67,14 @@ public class StudentEntity {
         this.age = age;
     }
 
+    public Date getPublication() {
+        return publication;
+    }
+
+    public void setPublication(Date publication) {
+        this.publication = publication;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,12 +83,13 @@ public class StudentEntity {
         return id == that.id &&
                 age == that.age &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(surname, that.surname);
+                Objects.equals(surname, that.surname) &&
+                Objects.equals(publication, that.publication);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, age);
+        return Objects.hash(id, name, surname, age, publication);
     }
 
     @Override
@@ -85,6 +99,7 @@ public class StudentEntity {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
+                ", publication=" + publication +
                 '}';
     }
 }
