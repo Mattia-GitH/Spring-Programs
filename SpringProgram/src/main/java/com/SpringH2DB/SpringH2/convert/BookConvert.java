@@ -16,7 +16,7 @@ public class BookConvert {
         bookModel.setTitle(bookEntity.getTitle());
         bookModel.setAuthor(bookEntity.getAuthor());
         bookModel.setIsbn(bookEntity.getIsbn());
-        bookModel.setActive(bookEntity.isActive());
+        bookModel.setPublication(bookEntity.getPublication());
         return bookModel;
     }
 
@@ -29,7 +29,7 @@ public class BookConvert {
         bookEntity.setTitle(bookModel.getTitle());
         bookEntity.setAuthor(bookModel.getAuthor());
         bookEntity.setIsbn(bookModel.getIsbn());
-        bookEntity.setActive(bookModel.isActive());
+        bookEntity.setPublication(bookModel.getPublication());
         return bookEntity;
     }
 

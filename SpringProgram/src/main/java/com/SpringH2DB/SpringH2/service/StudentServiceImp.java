@@ -31,7 +31,7 @@ public class StudentServiceImp implements StudentService{
             studentEntityUpdate.setName(studentModel.getName());
             studentEntityUpdate.setSurname(studentModel.getSurname());
             studentEntityUpdate.setAge(studentModel.getAge());
-            studentEntityUpdate.setPublication(studentModel.getPublication());
+            studentEntityUpdate.setActive(studentModel.isActive());
             repository.save(studentEntityUpdate);
             return StudentConvert.toModel(studentEntityUpdate);
         }else {

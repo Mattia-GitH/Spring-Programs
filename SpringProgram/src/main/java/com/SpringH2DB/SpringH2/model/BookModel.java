@@ -1,5 +1,6 @@
 package com.SpringH2DB.SpringH2.model;
 
+import java.sql.Date;
 import java.util.Objects;
 
 public class BookModel {
@@ -8,17 +9,17 @@ public class BookModel {
     private String title;
     private String author;
     private String isbn;
-    private boolean active;
+    private Date publication;
 
     public BookModel() {
     }
 
-    public BookModel(long id, String title, String author, String isbn, boolean active) {
+    public BookModel(long id, String title, String author, String isbn, Date publication) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
-        this.active = active;
+        this.publication = publication;
     }
 
     public long getId() {
@@ -53,12 +54,12 @@ public class BookModel {
         this.isbn = isbn;
     }
 
-    public boolean isActive() {
-        return active;
+    public Date getPublication() {
+        return publication;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setPublication(Date publication) {
+        this.publication = publication;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class BookModel {
         if (o == null || getClass() != o.getClass()) return false;
         BookModel bookModel = (BookModel) o;
         return id == bookModel.id &&
-                active == bookModel.active &&
+                publication == bookModel.publication &&
                 Objects.equals(title, bookModel.title) &&
                 Objects.equals(author, bookModel.author) &&
                 Objects.equals(isbn, bookModel.isbn);
@@ -75,7 +76,7 @@ public class BookModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, isbn, active);
+        return Objects.hash(id, title, author, isbn, publication);
     }
 
     @Override
@@ -85,7 +86,7 @@ public class BookModel {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", isbn='" + isbn + '\'' +
-                ", active=" + active +
+                ", publication=" + publication +
                 '}';
     }
 }

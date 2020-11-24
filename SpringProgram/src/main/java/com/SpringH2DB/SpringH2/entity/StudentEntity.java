@@ -1,7 +1,6 @@
 package com.SpringH2DB.SpringH2.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -21,18 +20,18 @@ public class StudentEntity {
     @Column(name = "AGE")
     private int age;
 
-    @Column(name = "PUBLICATION")
-    private Date publication;
+    @Column(name = "ACTIVE")
+    private boolean active;
 
     public StudentEntity() {
     }
 
-    public StudentEntity(long id, String name, String surname, int age, Date publication) {
+    public StudentEntity(long id, String name, String surname, int age, boolean active) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.publication = publication;
+        this.active = active;
     }
 
     public long getId() {
@@ -67,12 +66,12 @@ public class StudentEntity {
         this.age = age;
     }
 
-    public Date getPublication() {
-        return publication;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setPublication(Date publication) {
-        this.publication = publication;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override
@@ -84,12 +83,12 @@ public class StudentEntity {
                 age == that.age &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(surname, that.surname) &&
-                Objects.equals(publication, that.publication);
+                Objects.equals(active, that.active);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, age, publication);
+        return Objects.hash(id, name, surname, age, active);
     }
 
     @Override
@@ -99,7 +98,7 @@ public class StudentEntity {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
-                ", publication=" + publication +
+                ", active=" + active +
                 '}';
     }
 }

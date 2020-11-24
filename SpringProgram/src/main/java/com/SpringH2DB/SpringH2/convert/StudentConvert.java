@@ -18,7 +18,7 @@ public class StudentConvert {
         studentModel.setName(studentEntity.getName());
         studentModel.setSurname(studentEntity.getSurname());
         studentModel.setAge(studentEntity.getAge());
-        studentModel.setPublication(studentEntity.getPublication());
+        studentModel.setActive(studentEntity.getActive());
         return studentModel;
     }
 
@@ -28,7 +28,7 @@ public class StudentConvert {
         studentEntity.setName(studentModel.getName());
         studentEntity.setSurname(studentModel.getSurname());
         studentEntity.setAge(studentModel.getAge());
-        studentEntity.setPublication(studentModel.getPublication());
+        studentEntity.setActive(studentModel.getPublication());
         return studentEntity;
     }
 
