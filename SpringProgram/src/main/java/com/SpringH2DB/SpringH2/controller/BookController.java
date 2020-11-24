@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,26 @@ public class BookController {
     @GetMapping("/books/order")
     public ResponseEntity<List<BookModel>> orederByAuthor() {
         return ResponseEntity.ok().body(bookService.orderByAuthor());
+    }
+
+    @GetMapping("/books-date/{date}")
+    public ResponseEntity<List<BookModel>> publicatedAfterDate(@PathVariable Date date) {
+        return ResponseEntity.ok().body(bookService.publicatedAfterDate(date));
+    }
+
+    @GetMapping("/books-title/{letters}")
+    public ResponseEntity<List<BookModel>>  titleStartingWith(@PathVariable String letters) {
+        return ResponseEntity.ok().body(bookService.titleStartingWith(letters));
+    }
+
+    @GetMapping("/books-order/asc")
+    public ResponseEntity<List<BookModel>>  publicationOrderAsc() {
+        return ResponseEntity.ok().body(bookService.orderByPublicationAsc());
+    }
+
+    @GetMapping("/books-order/desc")
+    public ResponseEntity<List<BookModel>>  publicationOrderDesc() {
+        return ResponseEntity.ok().body(bookService.orderByPublicationDesc());
     }
 
     @PostMapping("/book")

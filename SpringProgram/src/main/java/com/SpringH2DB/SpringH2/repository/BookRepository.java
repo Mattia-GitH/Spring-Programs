@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -21,4 +22,12 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
             "LIKE CONCAT('%',s.surname) " +
             "GROUP BY b.author, b.title")
     List<JoinStudentBook> booksAndAuthors();
+
+    List<BookEntity> findByPublicationGreaterThanEqual(Date publication);
+
+    List<BookEntity> findByTitleStartingWith(String letters);
+
+    List<BookEntity> findAllByAuthorIsNotNullOrderByPublicationAsc();
+
+    List<BookEntity> findAllByAuthorIsNotNullOrderByPublicationDesc();
 }

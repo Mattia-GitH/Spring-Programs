@@ -9,6 +9,7 @@ import com.SpringH2DB.SpringH2.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -86,5 +87,29 @@ public class BookServiceImp implements BookService {
     public List<JoinStudentBook> booksAndAuthors() {
         List<JoinStudentBook> listBooksAndAuthors = repository.booksAndAuthors();
         return listBooksAndAuthors.stream().collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookModel> publicatedAfterDate(Date publication) {
+        List<BookEntity> bookEntities = repository.findByPublicationGreaterThanEqual(publication);
+        return bookConvert.listBooks(bookEntities);
+    }
+
+    @Override
+    public List<BookModel> titleStartingWith(String letters) {
+        List<BookEntity> bookEntities = repository.findByTitleStartingWith(letters);
+        return bookConvert.listBooks(bookEntities);
+    }
+
+    @Override
+    public List<BookModel> orderByPublicationAsc() {
+        List<BookEntity> bookEntities = repository.findAllByAuthorIsNotNullOrderByPublicationAsc();
+        return bookConvert.listBooks(bookEntities);
+    }
+
+    @Override
+    public List<BookModel> orderByPublicationDesc() {
+        List<BookEntity> bookEntities = repository.findAllByAuthorIsNotNullOrderByPublicationDesc();
+        return bookConvert.listBooks(bookEntities);
     }
 }

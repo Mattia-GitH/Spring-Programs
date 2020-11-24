@@ -22,4 +22,12 @@ public interface StudentService {
 
     List<StudentModel> ageGreaterThanEqual(int age);
 
+    List<StudentModel> studentInactive();
+
+    List<StudentModel> studentActive();
+
+    List<StudentModel> orderBySurnameAsc();
+
+    List<StudentModel> orderByActiveDesc();
+
 }

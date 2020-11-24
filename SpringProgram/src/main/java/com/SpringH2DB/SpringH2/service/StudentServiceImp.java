@@ -76,4 +76,28 @@ public class StudentServiceImp implements StudentService{
         List<StudentEntity> studentEntityList = repository.findByAgeGreaterThanEqual(age);
         return StudentConvert.listStudentsModel(studentEntityList);
     }
+
+    @Override
+    public List<StudentModel> studentInactive() {
+        List<StudentEntity> studentEntityList = repository.findByActiveFalse();
+        return StudentConvert.listStudentsModel(studentEntityList);
+    }
+
+    @Override
+    public List<StudentModel> studentActive() {
+        List<StudentEntity> studentEntityList = repository.findByActiveTrue();
+        return StudentConvert.listStudentsModel(studentEntityList);
+    }
+
+    @Override
+    public List<StudentModel> orderBySurnameAsc() {
+        List<StudentEntity> studentEntityList = repository.findByNameIsNotNullOrderBySurnameAsc();
+        return StudentConvert.listStudentsModel(studentEntityList);
+    }
+
+    @Override
+    public List<StudentModel> orderByActiveDesc() {
+        List<StudentEntity> studentEntityList = repository.findByNameIsNotNullOrderByActiveDesc();
+        return StudentConvert.listStudentsModel(studentEntityList);
+    }
 }

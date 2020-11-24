@@ -31,9 +31,29 @@ public class StudentController {
         return ResponseEntity.ok().body(studentService.findByName(name));
     }
 
-    @GetMapping("/students_age/{age}")
+    @GetMapping("/students-age/{age}")
     public ResponseEntity<List<StudentModel>> findByName(@PathVariable int age){
         return ResponseEntity.ok().body(studentService.ageGreaterThanEqual(age));
+    }
+
+    @GetMapping("/students-inactive")
+    public ResponseEntity<List<StudentModel>> inactiveStudents(){
+        return ResponseEntity.ok().body(studentService.studentInactive());
+    }
+
+    @GetMapping("/students-active")
+    public ResponseEntity<List<StudentModel>> activeStudents(){
+        return ResponseEntity.ok().body(studentService.studentActive());
+    }
+
+    @GetMapping("/students-order/surname")
+    public ResponseEntity<List<StudentModel>> orderBySurname(){
+        return ResponseEntity.ok().body(studentService.orderBySurnameAsc());
+    }
+
+    @GetMapping("/students-order/active")
+    public ResponseEntity<List<StudentModel>> orderByActive(){
+        return ResponseEntity.ok().body(studentService.orderByActiveDesc());
     }
 
 
