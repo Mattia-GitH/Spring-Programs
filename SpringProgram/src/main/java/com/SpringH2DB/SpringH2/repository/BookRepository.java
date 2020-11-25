@@ -4,9 +4,10 @@ import com.SpringH2DB.SpringH2.entity.BookEntity;
 import com.SpringH2DB.SpringH2.model.JoinStudentBook;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -30,4 +31,5 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
     List<BookEntity> findAllByAuthorIsNotNullOrderByPublicationAsc();
 
     List<BookEntity> findAllByAuthorIsNotNullOrderByPublicationDesc();
+
 }

@@ -8,6 +8,7 @@ import com.SpringH2DB.SpringH2.model.JoinStudentBook;
 import com.SpringH2DB.SpringH2.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.util.List;

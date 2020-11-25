@@ -7,6 +7,7 @@ import com.SpringH2DB.SpringH2.model.StudentModel;
 import com.SpringH2DB.SpringH2.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -99,5 +100,18 @@ public class StudentServiceImp implements StudentService{
     public List<StudentModel> orderByActiveDesc() {
         List<StudentEntity> studentEntityList = repository.findByNameIsNotNullOrderByActiveDesc();
         return StudentConvert.listStudentsModel(studentEntityList);
+    }
+
+    @Override
+    @Transactional
+    public StudentModel changeActive(StudentModel studentModel) {
+            repository.changeActive(studentModel.isActive(),studentModel.getId());
+            return studentModel;
+    }
+
+    @Override
+    @Transactional
+    public void deleteInactive() {
+        repository.deleteInactive();
     }
 }
