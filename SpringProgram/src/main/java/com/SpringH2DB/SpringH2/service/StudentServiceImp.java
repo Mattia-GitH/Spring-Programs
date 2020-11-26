@@ -116,4 +116,16 @@ public class StudentServiceImp implements StudentService {
     public void deleteInactive() {
         repository.deleteInactive();
     }
+
+    @Override
+    @Transactional
+    public StudentModel updateAge(int age, long id) {
+        Optional<StudentEntity> studentEntity = repository.findById(id);
+        if(studentEntity.isPresent()){
+            repository.updateAge(age, id);
+            return StudentConvert.toModel(studentEntity.get());
+        }else {
+            throw new StudentNotFoundException("Student not found id: " + id);
+        }
+    }
 }

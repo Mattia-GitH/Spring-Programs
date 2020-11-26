@@ -30,4 +30,8 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
     @Modifying
     @Query("DELETE FROM StudentEntity s WHERE s.active=FALSE")
     void deleteInactive();
+
+    @Modifying
+    @Query("UPDATE StudentEntity s SET s.age = ?1 WHERE s.id = ?2")
+    void updateAge(int age, long id);
 }

@@ -128,7 +128,7 @@ public class BookServiceImp implements BookService {
             repository.fixAuthor(author, id);
             return bookConvert.toBookModel(bookEntity.get());
         }else {
-            throw new BookNotFoundException("book not found with id: " + id);
+            throw new BookNotFoundException("book not found id: " + id);
         }
     }
 }

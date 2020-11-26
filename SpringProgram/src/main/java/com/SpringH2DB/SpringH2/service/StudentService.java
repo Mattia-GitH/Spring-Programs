@@ -34,4 +34,6 @@ public interface StudentService {
     StudentModel changeActive(boolean active, long id);
 
     void deleteInactive();
+
+    StudentModel updateAge(int age, long id);
 }

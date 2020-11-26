@@ -66,6 +66,11 @@ public class StudentController {
         return ResponseEntity.ok().body("deleted all students inactive");
     }
 
+    @GetMapping("/student-age/{age}/{id}")
+    public ResponseEntity<StudentModel> updateAge(@PathVariable int age, @PathVariable long id){
+        return ResponseEntity.ok().body(studentService.updateAge(age, id));
+    }
+
     @PostMapping("/student")
     public ResponseEntity<StudentModel> createStudent(@RequestBody StudentModel studentModel) {
         return ResponseEntity.ok().body(studentService.createStudent(studentModel));
