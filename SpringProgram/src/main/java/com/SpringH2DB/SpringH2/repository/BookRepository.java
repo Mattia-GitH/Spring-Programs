@@ -35,5 +35,4 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
     @Modifying
     @Query("DELETE FROM BookEntity b WHERE b.publication < ?1")
     void deleteOldBooks(Date publication);
-
 }

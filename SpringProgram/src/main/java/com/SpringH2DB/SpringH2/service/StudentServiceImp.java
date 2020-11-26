@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentServiceImp implements StudentService{
+public class StudentServiceImp implements StudentService {
 
     @Autowired
     StudentRepository repository;
@@ -27,7 +27,7 @@ public class StudentServiceImp implements StudentService{
     @Override
     public StudentModel updateStudent(StudentModel studentModel) {
         Optional<StudentEntity> studentOpt = repository.findById(studentModel.getId());
-        if(studentOpt.isPresent()){
+        if (studentOpt.isPresent()) {
             StudentEntity studentEntityUpdate = studentOpt.get();
             studentEntityUpdate.setName(studentModel.getName());
             studentEntityUpdate.setSurname(studentModel.getSurname());
@@ -35,7 +35,7 @@ public class StudentServiceImp implements StudentService{
             studentEntityUpdate.setActive(studentModel.isActive());
             repository.save(studentEntityUpdate);
             return StudentConvert.toModel(studentEntityUpdate);
-        }else {
+        } else {
             throw new StudentNotFoundException("Student not found " + studentModel.getId());
         }
     }
@@ -49,9 +49,9 @@ public class StudentServiceImp implements StudentService{
     @Override
     public StudentModel studentById(long id) {
         Optional<StudentEntity> studentOpt = repository.findById(id);
-        if (studentOpt.isPresent()){
+        if (studentOpt.isPresent()) {
             return StudentConvert.toModel(studentOpt.get());
-        }else {
+        } else {
             throw new StudentNotFoundException("Student not found " + id);
         }
     }
@@ -59,7 +59,7 @@ public class StudentServiceImp implements StudentService{
     @Override
     public void deleteStudent(long id) {
         Optional<StudentEntity> studentEntityOptional = repository.findById(id);
-        if(studentEntityOptional.isPresent()){
+        if (studentEntityOptional.isPresent()) {
             repository.delete(studentEntityOptional.get());
         } else {
             throw new StudentNotFoundException("Student not found " + id);
@@ -105,7 +105,7 @@ public class StudentServiceImp implements StudentService{
     @Override
     @Transactional
     public StudentModel changeActive(boolean active, long id) {
-        repository.changeActive(active,id);
+        repository.changeActive(active, id);
         Optional<StudentEntity> studentEntityOptional = repository.findById(id);
         StudentEntity studentEntity = studentEntityOptional.get();
         return StudentConvert.toModel(studentEntity);

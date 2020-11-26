@@ -21,7 +21,7 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
 
     List<StudentEntity> findByNameIsNotNullOrderBySurnameAsc();
 
-    List<StudentEntity>findByNameIsNotNullOrderByActiveDesc();
+    List<StudentEntity> findByNameIsNotNullOrderByActiveDesc();
 
     @Modifying
     @Query("UPDATE StudentEntity s SET s.active = ?1 WHERE s.id = ?2 ")
