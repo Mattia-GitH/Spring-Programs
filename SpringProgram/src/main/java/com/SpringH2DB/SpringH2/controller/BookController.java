@@ -68,6 +68,11 @@ public class BookController {
         return ResponseEntity.ok().body("Deleted books older than " + publication);
     }
 
+    @GetMapping("book-fix-author/{author}/{id}")
+    public ResponseEntity<BookModel> fixAuthor(@PathVariable String author, @PathVariable long id){
+        return ResponseEntity.ok().body(bookService.fixAuthor(author,id));
+    }
+
     @PostMapping("/book")
     public ResponseEntity<BookModel> createBook(@RequestBody BookModel bookModel) {
         return ResponseEntity.ok().body(bookService.createBook(bookModel));

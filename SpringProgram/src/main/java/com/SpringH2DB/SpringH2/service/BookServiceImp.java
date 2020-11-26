@@ -119,4 +119,16 @@ public class BookServiceImp implements BookService {
     public void deleteOldBooks(Date publication) {
         repository.deleteOldBooks(publication);
     }
+
+    @Transactional
+    @Override
+    public BookModel fixAuthor(String author, long id) {
+        Optional<BookEntity> bookEntity = repository.findById(id);
+        if (bookEntity.isPresent()) {
+            repository.fixAuthor(author, id);
+            return bookConvert.toBookModel(bookEntity.get());
+        }else {
+            throw new BookNotFoundException("book not found with id: " + id);
+        }
+    }
 }

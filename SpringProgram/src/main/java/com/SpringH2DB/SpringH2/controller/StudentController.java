@@ -55,17 +55,6 @@ public class StudentController {
         return ResponseEntity.ok().body(studentService.orderByActiveDesc());
     }
 
-    @PostMapping("/student")
-    public ResponseEntity<StudentModel> createStudent(@RequestBody StudentModel studentModel) {
-        return ResponseEntity.ok().body(studentService.createStudent(studentModel));
-    }
-
-    @PutMapping("/student/{id}")
-    public ResponseEntity<StudentModel> updateStudent(@PathVariable Long id, @RequestBody StudentModel studentModel) {
-        studentModel.setId(id);
-        return ResponseEntity.ok().body(studentService.updateStudent(studentModel));
-    }
-
     @GetMapping("/student-active/{status}/{id}")
     public ResponseEntity<StudentModel> changeActive(@PathVariable boolean status, @PathVariable long id) {
         return ResponseEntity.ok().body(studentService.changeActive(status, id));
@@ -75,6 +64,17 @@ public class StudentController {
     public ResponseEntity<String> deleteInactive() {
         studentService.deleteInactive();
         return ResponseEntity.ok().body("deleted all students inactive");
+    }
+
+    @PostMapping("/student")
+    public ResponseEntity<StudentModel> createStudent(@RequestBody StudentModel studentModel) {
+        return ResponseEntity.ok().body(studentService.createStudent(studentModel));
+    }
+
+    @PutMapping("/student/{id}")
+    public ResponseEntity<StudentModel> updateStudent(@PathVariable Long id, @RequestBody StudentModel studentModel) {
+        studentModel.setId(id);
+        return ResponseEntity.ok().body(studentService.updateStudent(studentModel));
     }
 
     @DeleteMapping("/student/{id}")

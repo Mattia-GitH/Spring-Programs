@@ -17,13 +17,6 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     List<BookEntity> findAllByAuthorIsNotNullOrderByAuthor();
 
-    @Query("SELECT new com.SpringH2DB.SpringH2.model.JoinStudentBook(b.title, s.name,s.surname)" +
-            "FROM BookEntity b " +
-            "INNER JOIN StudentEntity s ON b.author " +
-            "LIKE CONCAT('%',s.surname) " +
-            "GROUP BY b.author, b.title")
-    List<JoinStudentBook> booksAndAuthors();
-
     List<BookEntity> findByPublicationGreaterThanEqual(Date publication);
 
     List<BookEntity> findByTitleStartingWith(String letters);
@@ -32,7 +25,18 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     List<BookEntity> findAllByAuthorIsNotNullOrderByPublicationDesc();
 
+    @Query("SELECT new com.SpringH2DB.SpringH2.model.JoinStudentBook(b.title, s.name,s.surname)" +
+            "FROM BookEntity b " +
+            "INNER JOIN StudentEntity s ON b.author " +
+            "LIKE CONCAT('%',s.surname) " +
+            "GROUP BY b.author, b.title")
+    List<JoinStudentBook> booksAndAuthors();
+
     @Modifying
     @Query("DELETE FROM BookEntity b WHERE b.publication < ?1")
     void deleteOldBooks(Date publication);
+
+    @Modifying
+    @Query("UPDATE BookEntity b SET b.author = ?1 WHERE b.id = ?2")
+    void fixAuthor(String author, long id);
 }

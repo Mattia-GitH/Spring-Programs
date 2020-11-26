@@ -35,4 +35,6 @@ public interface BookService {
     List<BookModel> orderByPublicationDesc();
 
     void deleteOldBooks(Date publication);
+
+    BookModel fixAuthor(String author, long id);
 }
