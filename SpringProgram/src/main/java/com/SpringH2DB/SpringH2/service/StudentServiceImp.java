@@ -107,8 +107,12 @@ public class StudentServiceImp implements StudentService {
     public StudentModel changeActive(boolean active, long id) {
         repository.changeActive(active, id);
         Optional<StudentEntity> studentEntityOptional = repository.findById(id);
-        StudentEntity studentEntity = studentEntityOptional.get();
-        return StudentConvert.toModel(studentEntity);
+        if (studentEntityOptional.isPresent()) {
+            StudentEntity studentEntity = studentEntityOptional.get();
+            return StudentConvert.toModel(studentEntity);
+        }else {
+            throw new StudentNotFoundException("Student not foud id: " + id);
+        }
     }
 
     @Override
