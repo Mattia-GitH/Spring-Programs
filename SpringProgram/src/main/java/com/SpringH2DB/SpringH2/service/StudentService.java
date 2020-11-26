@@ -31,7 +31,7 @@ public interface StudentService {
 
     List<StudentModel> orderByActiveDesc();
 
-    StudentModel changeActive(StudentModel studentModel);
+    StudentModel changeActive(boolean active, long id);
 
     void deleteInactive();
 }

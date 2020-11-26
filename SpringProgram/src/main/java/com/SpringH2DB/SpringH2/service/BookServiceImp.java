@@ -113,4 +113,10 @@ public class BookServiceImp implements BookService {
         List<BookEntity> bookEntities = repository.findAllByAuthorIsNotNullOrderByPublicationDesc();
         return bookConvert.listBooks(bookEntities);
     }
+
+    @Transactional
+    @Override
+    public void deleteOldBooks(Date publication) {
+        repository.deleteOldBooks(publication);
+    }
 }

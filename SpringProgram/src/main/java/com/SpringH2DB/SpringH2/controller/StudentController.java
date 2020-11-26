@@ -67,20 +67,20 @@ public class StudentController {
         return ResponseEntity.ok().body(studentService.updateStudent(studentModel));
     }
 
-    @PutMapping("/student-active/")
-    public ResponseEntity<StudentModel> changeActive(@RequestBody StudentModel studentModel){
-        return ResponseEntity.ok().body(studentService.changeActive(studentModel));
+    @GetMapping("/student-active/{status}/{id}")
+    public ResponseEntity<StudentModel> changeActive(@PathVariable boolean status, @PathVariable long id){
+        return ResponseEntity.ok().body(studentService.changeActive(status,id));
+    }
+
+    @GetMapping("/students-inactive/delete")
+    public ResponseEntity<String> deleteInactive(){
+        studentService.deleteInactive();
+        return ResponseEntity.ok().body("deleted all students inactive");
     }
 
     @DeleteMapping("/student/{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable long id){
         studentService.deleteStudent(id);
         return ResponseEntity.ok().body("Delete student id:" + id);
-    }
-
-    @DeleteMapping("/students-inactive/delete")
-    public ResponseEntity<String> deleteInactive(){
-        studentService.deleteInactive();
-        return ResponseEntity.ok().body("deleted all students inactive");
     }
 }

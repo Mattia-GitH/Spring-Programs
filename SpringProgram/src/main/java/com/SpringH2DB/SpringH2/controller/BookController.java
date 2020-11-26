@@ -4,6 +4,7 @@ import com.SpringH2DB.SpringH2.model.BookModel;
 import com.SpringH2DB.SpringH2.model.JoinStudentBook;
 import com.SpringH2DB.SpringH2.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +61,13 @@ public class BookController {
     @GetMapping("/books-order/desc")
     public ResponseEntity<List<BookModel>>  publicationOrderDesc() {
         return ResponseEntity.ok().body(bookService.orderByPublicationDesc());
+    }
+
+    @GetMapping("/books-old/{publication}")
+    public ResponseEntity<String>  deleteOldBooks(@PathVariable String publication){
+        Date date=Date.valueOf(publication);
+        bookService.deleteOldBooks(date);
+        return ResponseEntity.ok().body("Deleted books older than " + publication);
     }
 
     @PostMapping("/book")

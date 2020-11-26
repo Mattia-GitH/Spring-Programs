@@ -3,8 +3,8 @@ package com.SpringH2DB.SpringH2.repository;
 import com.SpringH2DB.SpringH2.entity.BookEntity;
 import com.SpringH2DB.SpringH2.model.JoinStudentBook;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
@@ -31,5 +31,9 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
     List<BookEntity> findAllByAuthorIsNotNullOrderByPublicationAsc();
 
     List<BookEntity> findAllByAuthorIsNotNullOrderByPublicationDesc();
+
+    @Modifying
+    @Query("DELETE FROM BookEntity b WHERE b.publication < ?1")
+    void deleteOldBooks(Date publication);
 
 }

@@ -104,9 +104,11 @@ public class StudentServiceImp implements StudentService{
 
     @Override
     @Transactional
-    public StudentModel changeActive(StudentModel studentModel) {
-            repository.changeActive(studentModel.isActive(),studentModel.getId());
-            return studentModel;
+    public StudentModel changeActive(boolean active, long id) {
+        repository.changeActive(active,id);
+        Optional<StudentEntity> studentEntityOptional = repository.findById(id);
+        StudentEntity studentEntity = studentEntityOptional.get();
+        return StudentConvert.toModel(studentEntity);
     }
 
     @Override
