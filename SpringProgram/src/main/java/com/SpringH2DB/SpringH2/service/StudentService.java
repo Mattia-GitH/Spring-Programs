@@ -1,6 +1,5 @@
 package com.SpringH2DB.SpringH2.service;
 
-import com.SpringH2DB.SpringH2.entity.StudentEntity;
 import com.SpringH2DB.SpringH2.model.StudentModel;
 import org.springframework.stereotype.Service;
 

@@ -37,13 +37,13 @@ public class BookController {
     }
 
     @GetMapping("/books/order")
-    public ResponseEntity<List<BookModel>> orederByAuthor() {
+    public ResponseEntity<List<BookModel>> orderByAuthor() {
         return ResponseEntity.ok().body(bookService.orderByAuthor());
     }
 
     @GetMapping("/books-date/{date}")
-    public ResponseEntity<List<BookModel>> publicatedAfterDate(@PathVariable Date date) {
-        return ResponseEntity.ok().body(bookService.publicatedAfterDate(date));
+    public ResponseEntity<List<BookModel>> publishedAfterDate(@PathVariable Date date) {
+        return ResponseEntity.ok().body(bookService.publishedAfterDate(date));
     }
 
     @GetMapping("/books-title/{letters}")

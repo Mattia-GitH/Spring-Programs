@@ -91,7 +91,7 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
-    public List<BookModel> publicatedAfterDate(Date publication) {
+    public List<BookModel> publishedAfterDate(Date publication) {
         List<BookEntity> bookEntities = repository.findByPublicationGreaterThanEqual(publication);
         return bookConvert.listBooks(bookEntities);
     }

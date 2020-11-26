@@ -26,7 +26,7 @@ public interface BookService {
 
     List<JoinStudentBook> booksAndAuthors();
 
-    List<BookModel> publicatedAfterDate(Date publication);
+    List<BookModel> publishedAfterDate(Date publication);
 
     List<BookModel> titleStartingWith(String letters);
 
