@@ -18,11 +18,14 @@ import java.util.stream.Collectors;
 @Service
 public class BookServiceImp implements BookService {
 
-    @Autowired
-    private BookRepository repository;
+    private final BookRepository repository;
+    private final BookConvert bookConvert;
 
     @Autowired
-    private BookConvert bookConvert;
+    public BookServiceImp(BookRepository repository, BookConvert bookConvert){
+        this.repository = repository;
+        this.bookConvert = bookConvert;
+    };
 
     @Override
     public BookModel createBook(BookModel bookModel) {

@@ -12,8 +12,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class StudentController {
 
+    private final StudentService studentService;
+
     @Autowired
-    private StudentService studentService;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("/students")
     public ResponseEntity<List<StudentModel>> listStudents() {
