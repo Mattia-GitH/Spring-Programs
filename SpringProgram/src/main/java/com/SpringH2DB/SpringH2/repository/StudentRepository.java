@@ -24,11 +24,11 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
     List<StudentEntity> findByNameIsNotNullOrderByActiveDesc();
 
     @Modifying
-    @Query("UPDATE StudentEntity s SET s.active = ?1 WHERE s.id = ?2 ")
+    @Query("UPDATE StudentEntity s SET s.active = ?1 WHERE s.id = ?2")
     void changeActive(boolean active, long id);
 
     @Modifying
-    @Query("DELETE FROM StudentEntity s WHERE s.active=FALSE")
+    @Query("DELETE FROM StudentEntity s WHERE s.active = FALSE")
     void deleteInactive();
 
     @Modifying

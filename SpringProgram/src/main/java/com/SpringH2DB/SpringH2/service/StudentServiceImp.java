@@ -111,7 +111,7 @@ public class StudentServiceImp implements StudentService {
             StudentEntity studentEntity = studentEntityOptional.get();
             return StudentConvert.toModel(studentEntity);
         }else {
-            throw new StudentNotFoundException("Student not foud id: " + id);
+            throw new StudentNotFoundException("Student not found id: " + id);
         }
     }
 
