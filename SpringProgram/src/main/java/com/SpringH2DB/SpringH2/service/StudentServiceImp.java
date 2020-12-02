@@ -114,7 +114,7 @@ public class StudentServiceImp implements StudentService {
         if (studentEntityOptional.isPresent()) {
             StudentEntity studentEntity = studentEntityOptional.get();
             return StudentConvert.toModel(studentEntity);
-        }else {
+        } else {
             throw new StudentNotFoundException("Student not found id: " + id);
         }
     }
@@ -129,10 +129,10 @@ public class StudentServiceImp implements StudentService {
     @Transactional
     public StudentModel updateAge(int age, long id) {
         Optional<StudentEntity> studentEntity = repository.findById(id);
-        if(studentEntity.isPresent()){
+        if (studentEntity.isPresent()) {
             repository.updateAge(age, id);
             return StudentConvert.toModel(studentEntity.get());
-        }else {
+        } else {
             throw new StudentNotFoundException("Student not found id: " + id);
         }
     }

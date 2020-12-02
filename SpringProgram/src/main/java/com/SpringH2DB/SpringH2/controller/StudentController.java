@@ -71,7 +71,7 @@ public class StudentController {
     }
 
     @GetMapping("/student-age/{age}/{id}")
-    public ResponseEntity<StudentModel> updateAge(@PathVariable int age, @PathVariable long id){
+    public ResponseEntity<StudentModel> updateAge(@PathVariable int age, @PathVariable long id) {
         return ResponseEntity.ok().body(studentService.updateAge(age, id));
     }
 

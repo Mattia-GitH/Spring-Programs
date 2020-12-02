@@ -1,8 +1,8 @@
 package com.SpringH2DB.SpringH2.service;
 
 import com.SpringH2DB.SpringH2.convert.BookConvert;
-import com.SpringH2DB.SpringH2.exception.BookNotFoundException;
 import com.SpringH2DB.SpringH2.entity.BookEntity;
+import com.SpringH2DB.SpringH2.exception.BookNotFoundException;
 import com.SpringH2DB.SpringH2.model.BookModel;
 import com.SpringH2DB.SpringH2.model.JoinStudentBook;
 import com.SpringH2DB.SpringH2.repository.BookRepository;
@@ -22,10 +22,10 @@ public class BookServiceImp implements BookService {
     private final BookConvert bookConvert;
 
     @Autowired
-    public BookServiceImp(BookRepository repository, BookConvert bookConvert){
+    public BookServiceImp(BookRepository repository, BookConvert bookConvert) {
         this.repository = repository;
         this.bookConvert = bookConvert;
-    };
+    }
 
     @Override
     public BookModel createBook(BookModel bookModel) {
@@ -130,7 +130,7 @@ public class BookServiceImp implements BookService {
         if (bookEntity.isPresent()) {
             repository.fixAuthor(author, id);
             return bookConvert.toBookModel(bookEntity.get());
-        }else {
+        } else {
             throw new BookNotFoundException("book not found id: " + id);
         }
     }

@@ -4,7 +4,6 @@ import com.SpringH2DB.SpringH2.entity.BookEntity;
 import com.SpringH2DB.SpringH2.model.BookModel;
 import org.springframework.stereotype.Component;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 

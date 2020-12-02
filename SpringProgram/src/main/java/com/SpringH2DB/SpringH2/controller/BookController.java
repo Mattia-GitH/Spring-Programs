@@ -73,8 +73,8 @@ public class BookController {
     }
 
     @GetMapping("book-fix-author/{author}/{id}")
-    public ResponseEntity<BookModel> fixAuthor(@PathVariable String author, @PathVariable long id){
-        return ResponseEntity.ok().body(bookService.fixAuthor(author,id));
+    public ResponseEntity<BookModel> fixAuthor(@PathVariable String author, @PathVariable long id) {
+        return ResponseEntity.ok().body(bookService.fixAuthor(author, id));
     }
 
     @PostMapping("/book")
