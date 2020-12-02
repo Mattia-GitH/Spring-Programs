@@ -1,6 +1,5 @@
-package com.SpringH2DB.SpringH2;
+package com.SpringH2DB.SpringH2.convert;
 
-import com.SpringH2DB.SpringH2.convert.BookConvert;
 import com.SpringH2DB.SpringH2.entity.BookEntity;
 import com.SpringH2DB.SpringH2.model.BookModel;
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class BookTest {
+public class BookConvertTest {
 
     @Autowired
     BookConvert bookConvert;

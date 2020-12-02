@@ -1,15 +1,14 @@
-package com.SpringH2DB.SpringH2;
+package com.SpringH2DB.SpringH2.convert;
 
-import com.SpringH2DB.SpringH2.convert.StudentConvert;
 import com.SpringH2DB.SpringH2.entity.StudentEntity;
 import com.SpringH2DB.SpringH2.model.StudentModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class StudentTest {
+public class StudentConvertTest {
 
     @Test
-    void converterBidirectionalModelEntity(){
+    void converterBidirectionalModelEntity() {
         StudentModel student = new StudentModel();
         student.setId(1);
         student.setName("Mattia");
