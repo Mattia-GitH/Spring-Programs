@@ -62,8 +62,8 @@ public class StudentServiceTest {
         studentService.createStudent(studentModel);
 
         studentService.deleteStudent(1L);
-        List<StudentModel> bookModels = studentService.listStudents();
+        List<StudentModel> studentModelList = studentService.listStudents();
 
-        Assertions.assertEquals(0,bookModels.size());
+        Assertions.assertEquals(0,studentModelList.size());
     }
 }
