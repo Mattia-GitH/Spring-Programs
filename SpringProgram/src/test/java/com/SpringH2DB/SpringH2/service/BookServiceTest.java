@@ -16,7 +16,7 @@ public class BookServiceTest {
     private BookService bookService;
 
     @Test
-    void testing_createBook(){
+    void testing_createBook() {
         BookModel toCreate = new BookModel();
         toCreate.setAuthor("Author");
         toCreate.setTitle("Title");
@@ -24,11 +24,11 @@ public class BookServiceTest {
         BookModel created = bookService.createBook(toCreate);
         toCreate.setId(created.getId());
 
-        Assertions.assertEquals(created,toCreate);
+        Assertions.assertEquals(created, toCreate);
     }
 
     @Test
-    void testing_update(){
+    void testing_update() {
         BookModel oldBook = new BookModel();
         oldBook.setAuthor("Author");
         bookService.createBook(oldBook);
@@ -42,7 +42,7 @@ public class BookServiceTest {
     }
 
     @Test
-    void testing_listBook(){
+    void testing_listBook() {
         BookModel book1 = new BookModel();
         BookModel book2 = new BookModel();
 
@@ -51,11 +51,11 @@ public class BookServiceTest {
 
         List<BookModel> bookModels = bookService.listBook();
 
-        Assertions.assertEquals(2,bookModels.size());
+        Assertions.assertEquals(2, bookModels.size());
     }
 
     @Test
-    void testing_delete(){
+    void testing_delete() {
         BookModel bookModel = new BookModel();
         bookModel.setAuthor("Author");
         bookModel.setTitle("Title");
@@ -64,7 +64,7 @@ public class BookServiceTest {
         bookService.deleteBook(1L);
         List<BookModel> bookModels = bookService.listBook();
 
-        Assertions.assertEquals(0,bookModels.size());
+        Assertions.assertEquals(0, bookModels.size());
     }
 
 

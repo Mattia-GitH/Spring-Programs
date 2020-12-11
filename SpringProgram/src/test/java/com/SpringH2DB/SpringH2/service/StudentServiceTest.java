@@ -15,7 +15,7 @@ public class StudentServiceTest {
     private StudentService studentService;
 
     @Test
-    void testing_createStudent(){
+    void testing_createStudent() {
         StudentModel toCreate = new StudentModel();
         toCreate.setName("Name");
         toCreate.setSurname("Surname");
@@ -28,7 +28,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    void testing_update(){
+    void testing_update() {
         StudentModel toUpdate = new StudentModel();
         toUpdate.setName("Name");
         studentService.createStudent(toUpdate);
@@ -42,7 +42,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    void testing_listStudents(){
+    void testing_listStudents() {
         StudentModel student1 = new StudentModel();
         StudentModel student2 = new StudentModel();
 
@@ -51,11 +51,11 @@ public class StudentServiceTest {
 
         List<StudentModel> studentModelList = studentService.listStudents();
 
-        Assertions.assertEquals(2,studentModelList.size());
+        Assertions.assertEquals(2, studentModelList.size());
     }
 
     @Test
-    void testing_delete(){
+    void testing_delete() {
         StudentModel studentModel = new StudentModel();
         studentModel.setName("Name");
         studentModel.setSurname("Surname");
@@ -64,6 +64,6 @@ public class StudentServiceTest {
         studentService.deleteStudent(1L);
         List<StudentModel> studentModelList = studentService.listStudents();
 
-        Assertions.assertEquals(0,studentModelList.size());
+        Assertions.assertEquals(0, studentModelList.size());
     }
 }
