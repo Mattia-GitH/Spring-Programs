@@ -109,5 +109,36 @@ public class BookMockTest {
 
         Mockito.verify(bookRepository, Mockito.times(1)).delete(toSave);
         Mockito.verify(bookRepository, Mockito.times(1)).findById(toSave.getId());
-    };
+    }
+
+    @Test
+    void testing_titleStartingWith(){
+        BookModel bookA = new BookModel();
+        bookA.setId(1L);
+        bookA.setTitle("A");
+        BookModel bookB = new BookModel();
+        bookB.setId(2L);
+        bookB.setTitle("B");
+
+        BookEntity savedA = new BookEntity();
+        bookA.setId(1L);
+        bookA.setTitle("A");
+        BookEntity savedB = new BookEntity();
+        bookB.setId(2L);
+        bookB.setTitle("B");
+
+        List<BookEntity> results = new ArrayList<>();
+        results.add(savedA);
+
+        Mockito.when(bookRepository.save(Mockito.any(BookEntity.class))).thenReturn(savedA);
+        bookService.createBook(bookA);
+
+        Mockito.when(bookRepository.save(Mockito.any(BookEntity.class))).thenReturn(savedB);
+        bookService.createBook(bookB);
+
+        Mockito.when(bookRepository.findByTitleStartingWith("A")).thenReturn(results);
+
+        List<BookModel> bookModels = bookService.titleStartingWith("A");
+        Assertions.assertEquals(1,bookModels.size());
+    }
 }
