@@ -29,8 +29,9 @@ public class BookServiceImp implements BookService {
 
     @Override
     public BookModel createBook(BookModel bookModel) {
-        repository.save(bookConvert.toBookEntity(bookModel));
-        return bookModel;
+        BookEntity toSave = bookConvert.toBookEntity(bookModel);
+        repository.save(toSave);
+        return bookConvert.toBookModel(toSave);
     }
 
     @Override

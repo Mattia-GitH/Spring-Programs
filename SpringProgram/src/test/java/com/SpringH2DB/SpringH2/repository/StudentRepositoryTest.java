@@ -59,9 +59,8 @@ public class StudentRepositoryTest {
 
     @Test
     void testing_findAll() {
-        for (int i = 0; i <= 8; i++) {
+        for (int i = 0; i < 8; i++) {
             StudentEntity studentEntity = new StudentEntity();
-            studentEntity.setId(i);
             studentRepository.save(studentEntity);
         }
         Assertions.assertEquals(8, studentRepository.findAll().size());

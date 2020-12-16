@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+
 @ExtendWith(MockitoExtension.class)
 public class BookMockTest {
 
@@ -39,13 +42,14 @@ public class BookMockTest {
         toSave.setAuthor("Author");
         toSave.setTitle("Title");
 
-        Mockito.when(bookRepository.save(Mockito.any(BookEntity.class))).thenReturn(toSave);
+        Mockito.when(bookRepository.save(any(BookEntity.class))).thenReturn(toSave);
 
         BookModel saved = bookService.createBook(bookModel);
 
         Assertions.assertEquals(bookModel, saved);
-        Mockito.verify(bookRepository, Mockito.times(1)).save(toSave);
-        Mockito.verify(bookConvert, Mockito.times(1)).toBookEntity(bookModel);
+        verify(bookRepository, Mockito.times(1)).save(toSave);
+        verify(bookConvert, Mockito.times(1)).toBookEntity(bookModel);
+        verify(bookConvert, Mockito.times(1)).toBookModel(toSave);
     }
 
     @Test
@@ -58,23 +62,27 @@ public class BookMockTest {
         toSave.setAuthor("Author");
         toSave.setTitle("Title");
 
-        Mockito.when(bookRepository.save(Mockito.any(BookEntity.class))).thenReturn(toSave);
-        Mockito.when(bookRepository.findById(1L)).thenReturn(Optional.of(toSave));
-
-        bookService.createBook(bookModel);
-
         BookModel update = new BookModel();
         update.setId(1);
         update.setAuthor("Author Update");
         update.setTitle("Title Update");
+
+        Mockito.when(bookRepository.save(any(BookEntity.class))).thenReturn(toSave);
+        Mockito.when(bookRepository.findById(1L)).thenReturn(Optional.of(toSave));
+
+        bookService.createBook(bookModel);
 
         BookModel updated = bookService.updateBook(update);
         updated.setId(1L);
 
         Assertions.assertNotNull(updated);
         Assertions.assertEquals(update, updated);
-        Mockito.verify(bookRepository, Mockito.times(1)).save(toSave);
-        Mockito.verify(bookConvert, Mockito.times(1)).toBookEntity(bookModel);
+        verify(bookRepository, Mockito.times(2)).save(any(BookEntity.class));
+        verify(bookRepository, Mockito.times(1)).findById(1L);
+        verify(bookConvert, Mockito.times(1)).toBookEntity(bookModel);
+        verify(bookConvert, Mockito.times(1)).toBookEntity(any(BookModel.class));
+        verify(bookConvert, Mockito.times(2)).toBookModel(any(BookEntity.class));
+        verify(bookConvert, Mockito.times(1)).toBookModel(toSave);
     }
 
     @Test
@@ -89,8 +97,8 @@ public class BookMockTest {
         List<BookModel> bookModels = bookService.listBook();
 
         Assertions.assertEquals(bookEntities, bookModels);
-        Mockito.verify(bookRepository, Mockito.times(1)).findAll();
-        Mockito.verify(bookConvert, Mockito.times(2)).listBooks(bookRepository.findAll());
+        verify(bookRepository, Mockito.times(1)).findAll();
+        verify(bookConvert, Mockito.times(2)).listBooks(bookRepository.findAll());
     }
 
     @Test
@@ -101,14 +109,14 @@ public class BookMockTest {
         BookEntity toSave = new BookEntity();
         toSave.setId(1L);
 
-        Mockito.when(bookRepository.save(Mockito.any(BookEntity.class))).thenReturn(toSave);
+        Mockito.when(bookRepository.save(any(BookEntity.class))).thenReturn(toSave);
         Mockito.when(bookRepository.findById(1L)).thenReturn(Optional.of(toSave));
         bookRepository.save(toSave);
 
         bookService.deleteBook(1L);
 
-        Mockito.verify(bookRepository, Mockito.times(1)).delete(toSave);
-        Mockito.verify(bookRepository, Mockito.times(1)).findById(toSave.getId());
+        verify(bookRepository, Mockito.times(1)).delete(toSave);
+        verify(bookRepository, Mockito.times(1)).findById(toSave.getId());
     }
 
     @Test
@@ -130,15 +138,20 @@ public class BookMockTest {
         List<BookEntity> results = new ArrayList<>();
         results.add(savedA);
 
-        Mockito.when(bookRepository.save(Mockito.any(BookEntity.class))).thenReturn(savedA);
+        Mockito.when(bookRepository.save(any(BookEntity.class))).thenReturn(savedA);
         bookService.createBook(bookA);
 
-        Mockito.when(bookRepository.save(Mockito.any(BookEntity.class))).thenReturn(savedB);
+        Mockito.when(bookRepository.save(any(BookEntity.class))).thenReturn(savedB);
         bookService.createBook(bookB);
 
         Mockito.when(bookRepository.findByTitleStartingWith("A")).thenReturn(results);
 
         List<BookModel> bookModels = bookService.titleStartingWith("A");
+
         Assertions.assertEquals(1,bookModels.size());
+        verify(bookRepository, Mockito.times(2)).save(any(BookEntity.class));
+        verify(bookConvert, Mockito.times(2)).toBookEntity(any(BookModel.class));
+        verify(bookConvert, Mockito.times(3)).toBookModel(any(BookEntity.class));
+        verify(bookRepository, Mockito.times(1)).findByTitleStartingWith(any(String.class));
     }
 }
