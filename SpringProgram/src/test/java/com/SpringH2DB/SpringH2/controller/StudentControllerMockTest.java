@@ -24,8 +24,6 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-;
-
 
 @ExtendWith(SpringExtension.class)
 @AutoConfigureJsonTesters
@@ -100,6 +98,4 @@ public class StudentControllerMockTest {
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK.value());
         Assertions.assertEquals(response.getContentAsString(), listJSONTester.write(studentsListActive).getJson());
     }
-
-
 }
