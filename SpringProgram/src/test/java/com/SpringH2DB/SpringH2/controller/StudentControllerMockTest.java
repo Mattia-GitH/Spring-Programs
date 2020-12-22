@@ -77,10 +77,28 @@ public class StudentControllerMockTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
-        System.out.println("here " + response.getContentLength());
-
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK.value());
         Assertions.assertEquals(response.getContentAsString(), listJSONTester.write(studentsList).getJson());
+    }
+
+    @Test
+    void testing_get_list_of_users_active() throws Exception {
+        StudentModel studentActive = new StudentModel();
+        studentActive.setName("Active");
+        studentActive.setActive(true);
+
+        List<StudentModel> studentsListActive = new ArrayList<>();
+        studentsListActive.add(studentActive);
+
+        Mockito.when(studentService.studentActive()).thenReturn(studentsListActive);
+
+        MockHttpServletResponse response = mockMvc.perform(
+                get("/api/students-active")
+                        .accept(MediaType.APPLICATION_JSON))
+                        .andReturn().getResponse();
+
+        Assertions.assertEquals(response.getStatus(), HttpStatus.OK.value());
+        Assertions.assertEquals(response.getContentAsString(), listJSONTester.write(studentsListActive).getJson());
     }
 
 
