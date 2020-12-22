@@ -1,9 +1,7 @@
 package com.SpringH2DB.SpringH2.controller;
 
 
-import com.SpringH2DB.SpringH2.entity.StudentEntity;
 import com.SpringH2DB.SpringH2.model.StudentModel;
-import com.SpringH2DB.SpringH2.repository.StudentRepository;
 import com.SpringH2DB.SpringH2.service.StudentService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.json.JacksonTester;
-import org.springframework.boot.test.mock.mockito.MockBean;;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -25,6 +23,8 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+;
 
 
 @ExtendWith(SpringExtension.class)
@@ -57,7 +57,7 @@ public class StudentControllerMockTest {
 
         MockHttpServletResponse response = mockMvc.perform(
                 get("/api/student/1")
-                .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK.value());
@@ -95,7 +95,7 @@ public class StudentControllerMockTest {
         MockHttpServletResponse response = mockMvc.perform(
                 get("/api/students-active")
                         .accept(MediaType.APPLICATION_JSON))
-                        .andReturn().getResponse();
+                .andReturn().getResponse();
 
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK.value());
         Assertions.assertEquals(response.getContentAsString(), listJSONTester.write(studentsListActive).getJson());
