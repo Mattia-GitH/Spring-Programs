@@ -22,7 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @ExtendWith(SpringExtension.class)
@@ -42,6 +44,8 @@ public class StudentControllerMockTest {
     @Autowired
     private JacksonTester<List<StudentModel>> listJSONTester;
 
+
+    //Testing With Assertions
     @Test
     void testing_get_user_by_id() throws Exception {
         StudentModel student = new StudentModel();
@@ -58,8 +62,27 @@ public class StudentControllerMockTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
-        Assertions.assertEquals(response.getStatus(), HttpStatus.OK.value());
+        Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
         Assertions.assertEquals(response.getContentAsString(), studentJSONTest.write(student).getJson());
+    }
+
+    //Testing without Assertions
+    @Test
+    void testing_get_user_by_id_No_Assertions() throws Exception {
+        StudentModel student = new StudentModel();
+        student.setName("Name");
+        student.setSurname("Surname");
+        student.setAge(18);
+        student.setActive(true);
+
+
+        Mockito.when(studentService.studentById(any(long.class))).thenReturn(student);
+
+        mockMvc.perform(get("/api/student/1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(studentJSONTest.write(student).getJson()))
+                .andReturn().getResponse();
     }
 
     @Test
@@ -70,13 +93,11 @@ public class StudentControllerMockTest {
 
         Mockito.when(studentService.listStudents()).thenReturn(studentsList);
 
-        MockHttpServletResponse response = mockMvc.perform(
-                get("/api/students")
-                        .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/students")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(listJSONTester.write(studentsList).getJson()))
                 .andReturn().getResponse();
-
-        Assertions.assertEquals(response.getStatus(), HttpStatus.OK.value());
-        Assertions.assertEquals(response.getContentAsString(), listJSONTester.write(studentsList).getJson());
     }
 
     @Test
@@ -90,12 +111,47 @@ public class StudentControllerMockTest {
 
         Mockito.when(studentService.studentActive()).thenReturn(studentsListActive);
 
-        MockHttpServletResponse response = mockMvc.perform(
-                get("/api/students-active")
-                        .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/students-active")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(listJSONTester.write(studentsListActive).getJson()))
                 .andReturn().getResponse();
+    }
 
-        Assertions.assertEquals(response.getStatus(), HttpStatus.OK.value());
-        Assertions.assertEquals(response.getContentAsString(), listJSONTester.write(studentsListActive).getJson());
+    @Test
+    void testing_create_student() throws Exception {
+        StudentModel student = new StudentModel();
+        student.setName("Name");
+        student.setSurname("Surname");
+        student.setAge(18);
+        student.setActive(true);
+
+        Mockito.when(studentService.createStudent(any(StudentModel.class))).thenReturn(student);
+
+        mockMvc.perform(post("/api/student")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":0,\"name\":\"Name\",\"surname\":\"Surname\",\"age\":18,\"active\":true}"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(studentJSONTest.write(student).getJson()))
+                .andReturn().getResponse();
+    }
+
+    @Test
+    void testing_update_student_with_id() throws Exception {
+        StudentModel student = new StudentModel();
+        student.setName("NameUpdated");
+        student.setSurname("SurnameUpdated");
+        student.setAge(18);
+        student.setActive(true);
+
+        Mockito.when(studentService.updateStudent(any(StudentModel.class))).thenReturn(student);
+
+        mockMvc.perform(
+                put("/api/student/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(studentJSONTest.write(student).getJson()))
+                .andExpect(status().isOk())
+                .andExpect(content().json(studentJSONTest.write(student).getJson()))
+                .andReturn().getResponse();
     }
 }
